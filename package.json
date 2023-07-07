@@ -43,9 +43,5 @@
     "> 3% in JP",
     "not IE 11",
     "last 1 versions"
-  ],
-  "dependencies": {
-    "jquery": "^3.7.0",
-    "slick-carousel": "^1.8.1"
-  }
+  ]
 }
