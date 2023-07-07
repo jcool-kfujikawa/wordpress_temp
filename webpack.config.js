@@ -35,11 +35,6 @@ const config = {
         },
       ],
     }),
-
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    }),
     
     new BrowserSyncPlugin({
       open: true,
