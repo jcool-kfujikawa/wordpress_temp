@@ -18,6 +18,7 @@ const config = {
   entry: {
     common: './src/lib/common.js', // 共通のJavaScript
     // その他ページを増やす場合はここに追加
+    about: './src/lib/about.js',
   },
   output: {
     filename: './assets/js/[name]bundle.js',
