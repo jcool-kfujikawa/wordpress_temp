@@ -39,6 +39,10 @@
     "dev": "webpack --progress --mode=development --watch",
     "build": "webpack --progress --mode=production --node-env=production"
   },
+  "volta": {
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  },
   "browserslist": [
     "> 3% in JP",
     "not IE 11",
