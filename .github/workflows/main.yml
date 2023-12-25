@@ -29,9 +29,11 @@ jobs:
 
     - name: Prepare Deployment Files
       run: |
+        shopt -s extglob
         mkdir deploy-dir
         cp -r dist/* deploy-dir/
-        cp -r !(node_modules|dist|deploy-dir|.gitattributes|.gitignore|package-lock.json|package.json|README.md|webpack.config.js) deploy-dir/
+        cp -r !(node_modules|dist|deploy-dir|.git|.gitattributes|.gitignore|package-lock.json|package.json|README.md|webpack.config.js) deploy-dir/
+      shell: /usr/bin/bash -e {0}
 
     - name: Deploy
       uses: SamKirkland/FTP-Deploy-Action@4.3.1
