@@ -1,0 +1,45 @@
+name: Develop Build and Deploy
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Build
+      run: npm run build
+
+    - name: Prepare Deployment Files
+      run: |
+        shopt -s extglob
+        mkdir deploy-dir
+        cp -r dist/* deploy-dir/
+        cp -r !(node_modules|src|dist|deploy-dir|.git|.gitattributes|.gitignore|package-lock.json|package.json|README.md|webpack.config.js) deploy-dir/
+      shell: /usr/bin/bash -e {0}
+
+    - name: Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.3.1
+      with:
+        server: ${{ secrets.DEV_SERVER }}
+        username: ${{ secrets.DEV_USERNAME }}
+        password: ${{ secrets.DEV_PASSWORD }}
+        local-dir: ./deploy-dir/
+        server-dir: /html/test-actions/
